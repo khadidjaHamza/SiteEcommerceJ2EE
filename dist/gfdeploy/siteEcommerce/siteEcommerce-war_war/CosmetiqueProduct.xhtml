@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Porduct children List</title>
+    </h:head>
+    <h:body>
+       <ui:composition template="./WEB-INF/standardTemplate.xhtml">
+           <ui:define name="content">
+             <div id="center">
+                <div class="cart">
+                    <a href="CartList.xhtml">
+                        <img src="resources/images/Shopping_Cart.png" alt="" title="Panier"/>
+                    </a>
+                    <a href="Login.xhtml">
+                         <img src="resources/images/profile_1.jpg" alt="" title="Profile"/>
+                    </a>
+                </div>
+                <div class="productList">
+                    <ui:repeat value="#{ProductMBean.products}" var="item">
+                       <c:set var="stockLabel" value="En Stock"/>
+                        <c:set var="availabiltyCSS" value="available"/>
+                        <c:set var="itemName" value="Cosmetique"/>
+                          <ui:fragment rendered="#{item.categoryId.name eq itemName}">
+                             <c:if test="#{item.availability}">
+                            <c:set var="availabiltyCSS" value="notAvailable"/>
+                            <c:set var="stockLabel" value="Rupture de stock"/>
+                        </c:if>
+                     
+                        <div class="product" id="product">
+                            <h:link outcome="ProductId">
+                                <f:param name="id" value="#{item.id}" />
+                                <img src="resources/images/#{item.image}" alt=""></img>
+                                <br> #{item.name}</br>
+                                <br> <span class="${availabiltyCSS}">${stockLabel}</span></br>
+                            </h:link>
+                        </div>
+                          </ui:fragment>
+                       
+                    </ui:repeat>
+                </div>
+            </div>
+<!--                <h1><h:outputText value="List"/></h1>
+            <ui:repeat value="#{ProductMBean.products}" var="item">
+               
+                 <lu>
+                    <img src="resources/images/#{item.image}" alt=""/>
+                     <h:outputText value="#{item.name}"/> 
+                 </lu>
+               
+            </ui:repeat>-->
+<!--                <p:dataTable value="#{ProductMBean.products}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                   <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Availability"/>
+                        </f:facet>
+                        <h:outputText value="#{item.availability}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Image"/>
+                        </f:facet>
+                        
+                        <img src="resources/images/#{item.image}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Price"/>
+                        </f:facet>
+                        <h:outputText value="#{item.price}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantity"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quantity}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.type}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="CategoryId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.categoryId}"/>
+                    </p:column>
+                </p:dataTable>
+           -->
+        </ui:define>
+      </ui:composition>
+    </h:body>
+</html>
+

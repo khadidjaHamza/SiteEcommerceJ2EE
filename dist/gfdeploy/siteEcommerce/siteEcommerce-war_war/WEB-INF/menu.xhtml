@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   
+        <ul>       
+            <div  class="button_left"  >
+                <a href="faces/ProductList.xhtml">Tous les produits</a>
+            </div>
+            <ui:repeat value="#{categoryMBean.category}" var="item">
+              
+                    <c:set var="itemName" value="Sport"/>
+                    <c:set var="itemName1" value="Cosmetique"/>
+                    <c:set var="itemName2" value="Livres"/>
+                    <c:set var="itemName3" value="Enfants"/>
+                    <!--<h:outputText value="le nom est #{item.name }"></h:outputText>-->
+                    <ui:fragment rendered="#{item.name eq itemName}">
+                    <div  class="button_left"  >
+                    <h:link value="#{item.name}" outcome="/Sportproduct"/></div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{item.name eq itemName1}">
+                        <div  class="button_left"  >
+                            <h:link value="#{item.name}" outcome="/CosmetiqueProduct"/>
+                        </div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{item.name eq itemName2}">
+                        <div  class="button_left"  >
+                            <h:link value="#{item.name}" outcome="/Bookproduct"/>
+                        </div>
+                    </ui:fragment>
+                     <ui:fragment rendered="#{item.name eq itemName3}">
+                         <div  class="button_left"  >
+                             <h:link value="#{item.name}" outcome="/ChildrenProduct"/>
+                         </div>
+                    </ui:fragment>
+                    
+               
+            </ui:repeat>
+        </ul> 
+</ui:composition>

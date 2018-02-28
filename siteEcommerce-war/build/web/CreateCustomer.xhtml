@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Register</title>
+    </h:head>
+    <h:body class="tundra">
+       <ui:composition template="./WEB-INF/standardTemplate.xhtml">
+           <ui:define name="content">
+            <div id="center">
+                   <div class="cart"> 
+                       <a href="CartServlet">
+                           <img src="resources/images/Shopping_Cart.png" alt="" title="Panier"/>
+                       </a>
+                   </div>
+                <div class="CreateCustomer">
+                    <h3> Créer un nouveau client </h3>
+                <h:form>
+                <h:outputText value="Firstname " />
+          
+                <h:inputText id="firstname" value="#{loginMBean.firstname}" required="true" ></h:inputText>
+		<h:message for="firstname"></h:message>
+		<br></br><br></br>
+		
+		<h:outputText value="LastName " />
+           
+                <h:inputText id="lastname" value="#{loginMBean.lastname}" required="true" ></h:inputText>
+		<h:message for="lastname" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                
+                <h:outputText value="Email " />
+           
+                <h:inputText id="email" value="#{loginMBean.email}" required="email" ></h:inputText>
+		<h:message for="email" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                
+                <h:outputText value="Password " />
+                
+                <h:inputSecret id="password" value="#{loginMBean.password}" required="true" ></h:inputSecret>
+		<h:message for="password"></h:message>
+		<br></br><br></br>
+		
+		<h:outputText value="Adresse " />
+           
+                <h:inputText id="billingaddress" value="#{loginMBean.billingaddress}" required="true" ></h:inputText>
+		<h:message for="billingaddress" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                
+                <h:outputText value="Ville " />
+                
+                <h:inputText id="billingcity" value="#{loginMBean.billingcity}" required="true" ></h:inputText>
+		<h:message for="billingcity"></h:message>
+		<br></br><br></br>
+		
+		<h:outputText value="Code " />
+           
+                <h:inputText id="billingzipcode" value="#{loginMBean.billingzipcode}" required="true" ></h:inputText>
+		<h:message for="billingzipcode" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                
+                <h:outputText value="Telephone " />
+                <h:inputText id="phone" value="#{loginMBean.phone}" required="true" ></h:inputText>
+		<h:message for="phone"></h:message>
+		<br></br><br></br>
+		
+		<h:outputText value="Address de facturation" />
+           
+                <h:inputText id="shipingaddress" value="#{loginMBean.shipingaddress}" required="true" ></h:inputText>
+		<h:message for="shipingaddress" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                
+                <h:outputText value="Ville de facturation" />
+                <h:inputText id="shipingcity" value="#{loginMBean.shipingcity}" required="true" ></h:inputText>
+		<h:message for="shipingcity"></h:message>
+		<br></br><br></br>
+		
+		<h:outputText value="Code de facturation" />
+           
+                <h:inputText id="shipingzipcode" value="#{loginMBean.shipingzipcode}" required="true" ></h:inputText>
+		<h:message for="shipingzipcode" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                
+                <h:commandButton action="#{loginMBean.validateUsernamePasswordAdd()}"
+                value="Valider" ></h:commandButton>
+               
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+      </ui:composition>
+    </h:body>
+</html>
+

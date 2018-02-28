@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+       <ui:composition template="./WEB-INF/standardTemplate.xhtml">
+           <ui:define name="content">
+        <div class="cart"> 
+            <a href="CartList.xhtml">
+                 <img src="resources/images/Shopping_Cart.png" alt="" title="Panier"/>
+            </a>
+        </div>
+        <h:form id="formId">
+	    <h3>Connectez-vous</h3>
+	    <h:outputText value="Username " />
+            <h:inputText id="username" value="#{loginMBean.firstname}" required="true" ></h:inputText>
+	    <h:message for="username"></h:message>
+		<br></br><br></br>
+		
+            <h:outputText value="Password " />
+            <h:inputSecret id="password" value="#{loginMBean.password}" required="true" ></h:inputSecret>
+	    <h:message for="password" style = "color:red;margin:8px;"></h:message>
+		<br></br><br></br>
+                  <h:commandButton id="loginID" action="#{loginMBean.validateUsernamePassword()}"
+                value="Login" >
+                <h:message for="loginID" style = "color:red;margin:8px;"></h:message>
+                  </h:commandButton>
+                <br></br><br></br>
+            <div>
+                <h:link value="S'inscrire" outcome="CreateCustomer.xhtml"></h:link>
+            </div> 
+	</h:form>
+        </ui:define>
+      </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Porduct List</title>
+    </h:head>
+    <h:body>
+       <ui:composition template="./WEB-INF/standardTemplate.xhtml">
+           <ui:define name="content">
+             <div id="center">
+                <div class="cart">
+                    <a href="CartList.xhtml">
+                        <img src="resources/images/Shopping_Cart.png" alt="" title="Panier"/>
+                    </a>
+                    <a href="Login.xhtml">
+                         <img src="resources/images/profile_1.jpg" alt="" title="Profile"/>
+                    </a>
+                </div>
+                <div class="productList">
+                    <f:metadata>
+                    <f:viewParam name="id" value="#{id}" />
+                    </f:metadata>
+                    
+                    <ui:repeat value="#{ProductMBean.products}" var="item">
+                                           
+                        <ui:fragment rendered="#{item.id eq id}">  
+                            <div class="product" id="product">
+                                 <br></br><br></br> 
+                                 <p class="title"><img src="resources/images/#{item.image}" alt=""></img></p>
+                                     <br></br>
+                                     <br> <p class="title"> #{item.name}</p></br>
+                                   
+                                    <span>
+                                         <p class="title"> Category : </p>
+                                         <p class="details"> #{item.categoryId.name}</p>
+                                    </span>
+                                    <div>
+                                        <p class="title">  Description : </p> 
+                                        <p class="details">#{item.description}</p> 
+                                    </div>
+                                      <br></br><br></br>
+                                    <div>
+                                        <p class="title"> Prix : </p> 
+                                        <p class="details">#{item.price} euros </p>
+                                    </div>
+                                        <br></br><br></br>
+                            </div>
+                        </ui:fragment>
+                    </ui:repeat>
+                         <h:form>
+                            <h:outputText value="Quantité " />
+                            <h:inputText id="Quantité" value="#{lineItemMBean.quantity}" required="true" ></h:inputText>
+                            <h:message for="Quantité"></h:message>
+                            <h:commandButton action="#{lineItemMBean.addItem(id)}"
+                                            value="Ajouter au panier" ></h:commandButton>
+                       </h:form>
+                </div>
+            </div>
+        </ui:define>
+      </ui:composition>
+    </h:body>
+</html>
+

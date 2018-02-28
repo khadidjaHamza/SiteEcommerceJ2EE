@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Logout</title>
+</h:head>
+<h:body>
+      <ui:composition template="./WEB-INF/standardTemplate.xhtml">
+       <ui:define name="content">
+	    <div>
+                <a href="CartServlet">
+                    <img src="resources/images/Shopping_Cart.png" alt="" title="Panier"/>
+                </a>
+                <a href="Login.xhtml">
+                   <img src="resources/images/profile_1.jpg" alt="" title="Profile"/>
+                </a>
+            </div>
+           <p>Welcome #{loginMBean.firstname}</p>
+           
+             <h:link value="Logout" outcome="/ProductList"></h:link>
+       </ui:define>
+      </ui:composition>
+</h:body>
+</html>
+

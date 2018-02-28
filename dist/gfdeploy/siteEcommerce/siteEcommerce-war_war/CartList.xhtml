@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+    <ui:composition template="./WEB-INF/standardTemplate.xhtml">
+        <ui:define name="content">
+            <div align="right">
+                <a href="Login.xhtml">
+                   <img src="resources/images/profile_1.jpg" alt="" title="Profile"/>
+                </a>
+                 <p >Welcome #{loginMBean.firstname}</p>
+                 <h:link value="Logout" outcome="/ProductList"></h:link>
+            </div>
+          
+            <div id="center">
+                <div class="cartDiv">
+                    <h2>Votre panier </h2>
+                    <form action="" id="CartForm">
+                        <table border="1" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Prix unitaire $</th>
+                                    <th>Quantité</th>
+                                    <th>Total $ </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="lineItem" items="#{lineItemMBean.lineitem}">
+                                <tr>
+                                    <td><img src="resources/images/#{lineItem.productId.image}" alt=""/>
+                                        #{lineItem.productId.name}
+                                    </td>
+                                    <td>
+                                            #{lineItem.productId.price}
+                                    </td>
+                                    <td id="lineItem_#{lineItem.id}">
+                                               <input id="#{lineItem.id}" name="#{lineItem.id}" type="text"
+                                                   dojoType="dijit.form.ValidationTextBox"
+                                                   value="#{lineItem.quantity}"
+                                                   constraints="{min:1,max:#{lineItem.quantity},places:0}"
+                                                   promptMessage= "Entrer une quantité entre 1 et #{lineItem.quantity}"
+                                                   required= "true"
+                                                   invalidMessage= "Valeur Invalide."
+                                                   />
+                                                <br>
+                                                    <h4>
+                                                    Quantité restante: #{lineItem.quantity}
+                                                    <input type="hidden" value="#{lineItem.quantity}"/>
+                                                    </h4>
+                                                </br> 
+                                                <br>
+                                                    <div class="error"> #{typeError}</div>
+                                                </br>
+                                                <br> #{quantityError} </br>
+                                                <br> #{remainQuantityError}</br>
+                                    </td>
+                                    <td>#{lineItem.subtotal}</td>
+                                    <td>
+                                        <h:form>
+                                            <h:commandButton action="#{lineItemMBean.deleteItem(lineItem.id)}" type="image" image="resources/images/Shopping_Cart_Remove.png"
+                                             value="Supprimer l'article du panier" ></h:commandButton>
+                                         </h:form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <br></br><br></br><br></br><br></br>
+                                <tr>
+                                    <td>Total </td>
+                                    <td>#{lineItemMBean.total}</td>
+                                    <td> Euro</td>
+                                </tr>
+                        <br></br><br></br>
+                        <div align="left">
+                               <h:form>
+                                  <ui:fragment rendered="#{loginMBean.firstname eq null}">
+                                    <h:button outcome="/Login" value="Commander"></h:button>
+                                  </ui:fragment> 
+                                 <ui:fragment rendered="#{not loginMBean.firstname eq null}">
+                                    <h:button outcome="/CartList" value="Valider"></h:button>
+                                    </ui:fragment> 
+                               </h:form>
+                         </div>
+                        <div align="right">
+                            <h:form>                                         
+                                <h:button outcome="/ProductList"  
+                                   value="Commander d'autre articles" ></h:button>
+                                </h:form>                                       
+                        </div>
+                          
+                    </form>
+                </div>
+            </div>
+        <form id="UpdateCartForm" action="UpdateCartServlet">
+            <input id="DELETE_LINE_ITEM" type="hidden" name="DELETE_LINE_ITEM"/>
+            <input type="hidden" id="actionDelete" name="actionDelete" value=""/>
+        </form>
+        </ui:define>
+    </ui:composition>
+    </h:body>
+</html>
+
